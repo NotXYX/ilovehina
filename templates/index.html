@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I Love You Hina</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="heart-container"></div>
+
+  <!-- 🐰 Hello Kitty Popup -->
+  <div class="kitty-box hidden">
+    <img src="/static/hello-kitty.png" class="kitty-img" />
+    <p class="kitty-text">Hina is my favorite human 💖</p>
+  </div>
+
+  <div class="center-content">
+    <button class="surprise-btn" onclick="reveal()">I made this for you ❤️</button>
+    <h1 id="love-text" class="hidden-text">Hina... I love you so much 💗</h1>
+    <audio id="bg-music" autoplay loop>
+      <source src="/static/love.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- Falling Photos -->
+  <img id="falling-photo-left" class="falling-photo hidden" src="/static/pics/1.jpg" />
+  <img id="falling-photo-right" class="falling-photo hidden" src="/static/pics/2.jpg" />
+
+  <script>
+    const messages = [
+      "Hina, I love you so much",
+      "You're literally the best thing in my life",
+      "I feel safe when I think about you",
+      "I wish I could hug you right now",
+      "You're everything I didn't know I needed",
+      "I love the way you speak",
+      "You make me feel alive fr",
+      "Hina, you're home to me 🩷"
+    ];
+
+    const photos = ["1.jpg", "2.jpg", "3.jpg"];
+    let msgIndex = 0;
+    let photoIndex = 0;
+    let sideToggle = true;
+
+    function reveal() {
+      document.querySelector(".surprise-btn").style.display = "none";
+      const loveText = document.getElementById("love-text");
+      loveText.classList.remove("hidden-text");
+      loveText.classList.add("fade-text");
+
+      document.getElementById("bg-music").play();
+
+      setInterval(() => {
+        msgIndex = (msgIndex + 1) % messages.length;
+        loveText.innerText = messages[msgIndex];
+      }, 4000);
+
+      setInterval(showNextPhoto, 6000);
+
+      document.querySelector(".kitty-box").classList.remove("hidden");
+      document.querySelector(".kitty-box").classList.add("kitty-appear");
+    }
+
+    function showNextPhoto() {
+      const left = document.getElementById("falling-photo-left");
+      const right = document.getElementById("falling-photo-right");
+      const photo = sideToggle ? left : right;
+      sideToggle = !sideToggle;
+
+      photo.classList.remove("falling");
+      photo.classList.remove("hidden");
+      photoIndex = (photoIndex + 1) % photos.length;
+      photo.src = `/static/pics/${photos[photoIndex]}`;
+      void photo.offsetWidth;
+      photo.classList.add("falling");
+
+      const mem = document.createElement("img");
+      mem.src = photo.src;
+      mem.className = "memory-polaroid";
+      document.getElementById("memory-stack").appendChild(mem);
+
+      setTimeout(() => {
+        photo.classList.add("hidden");
+      }, 8000);
+    }
+
+    const container = document.querySelector('.heart-container');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      container.appendChild(heart);
+    }
+  </script>
+</body>
+</html>

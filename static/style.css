@@ -1,0 +1,154 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #ffdce0, #d0e0ff);
+  font-family: 'Quicksand', sans-serif;
+  overflow: hidden;
+}
+
+.center-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.hidden-text {
+  display: none;
+}
+
+.fade-text {
+  font-size: 2rem;
+  color: #8b005d;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.surprise-btn {
+  font-size: 1.2rem;
+  padding: 14px 30px;
+  background-color: #ff4d6d;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.surprise-btn:hover {
+  transform: scale(1.1);
+}
+
+.heart-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  background-color: #ff4d6d;
+  position: absolute;
+  top: -20px;
+  clip-path: polygon(50% 0%, 100% 30%, 85% 100%, 50% 75%, 15% 100%, 0% 30%);
+  animation: floatDown linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatDown {
+  to {
+    transform: translateY(120vh);
+    opacity: 0;
+  }
+}
+
+.falling-photo {
+  position: absolute;
+  top: -250px;
+  width: 300px;
+  height: auto;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+  z-index: 3;
+}
+
+#falling-photo-left {
+  left: 40px;
+}
+
+#falling-photo-right {
+  right: 40px;
+}
+
+.falling-photo.falling {
+  animation: photoFallWobble 8s ease-in-out forwards;
+  opacity: 1;
+}
+
+@keyframes photoFallWobble {
+  0%   { top: -250px; transform: translateX(0); opacity: 0; }
+  20%  { opacity: 1; }
+  40%  { transform: translateX(15px); }
+  60%  { transform: translateX(-15px); }
+  80%  { transform: translateX(10px); }
+  100% { top: 85%; transform: translateX(0); opacity: 0; }
+}
+
+.hidden {
+  display: none;
+}
+
+/* Hello Kitty */
+.kitty-box {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  text-align: center;
+  background: #fff8fb;
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.kitty-appear {
+  opacity: 1;
+  transform: scale(1);
+  animation: kittyWink 2s ease-in-out 1s forwards;
+}
+
+.kitty-img {
+  width: 60px;
+  height: auto;
+}
+
+.kitty-text {
+  font-size: 0.9rem;
+  color: #ff4d6d;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+@keyframes kittyWink {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
